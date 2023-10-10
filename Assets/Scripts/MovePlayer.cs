@@ -16,6 +16,8 @@ public class MovePlayer : MonoBehaviour
     private float speed = 0;
     
     [SerializeField]
+    private float stopAnimationDistance = 0.1f; // Distancia a la que se detendrá la animación
+    [SerializeField]
     private float moveCooldown = 0.5f; // Tiempo de espera entre movimientos
     [SerializeField]
     private float walkSpeed = 2.0f; // Velocidad de caminar
@@ -85,42 +87,39 @@ public class MovePlayer : MonoBehaviour
         
     }
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
-        // Calcula la velocidad actual del NavMeshAgent
-        speed = agent.velocity.magnitude;
-        Debug.Log("speed: "+speed);
-        if (speed>0.5f)
-        {
-            // Establece el valor del parámetro "Walk" en el Animator
-            animator.SetFloat("Walk", speed > 1.8f ? 1 : 0.3f);
-            
-        }
-        else
-        {
-            animator.SetFloat("Walk", 0);
-        }
-        
+        SetWalkAnimation();
 
         if (!isMoving)
         {
+            // Realiza la rotación del personaje antes de moverlo
             if (Input.GetKeyDown(KeyCode.W) && currentI < 4)
             {
+                RotateCharacter(-90f);
                 TryMove(currentI + 1, currentJ);
             }
             else if (Input.GetKeyDown(KeyCode.A) && currentJ > 0)
             {
+                RotateCharacter(180f);
                 TryMove(currentI, currentJ - 1);
             }
             else if (Input.GetKeyDown(KeyCode.S) && currentI > 0)
             {
+                RotateCharacter(90f);
                 TryMove(currentI - 1, currentJ);
             }
             else if (Input.GetKeyDown(KeyCode.D) && currentJ < 4)
             {
+                RotateCharacter(0f);
                 TryMove(currentI, currentJ + 1);
             }
+        }
+
+        // Verifica si el jugador está cerca del destino y detiene la animación
+        if (Vector3.Distance(transform.position, agent.destination) <= stopAnimationDistance)
+        {
+            animator.SetFloat("Walk", 0);
         }
 
         // Reduce el tiempo de espera entre movimientos
@@ -130,11 +129,38 @@ public class MovePlayer : MonoBehaviour
         }
     }
 
+
+    private void SetWalkAnimation()
+    {
+        // Calcula la velocidad actual del NavMeshAgent
+        speed = agent.velocity.magnitude;
+        if (speed>1.99)
+        {
+            Debug.Log("speed: " + speed);
+        }
+        if (speed < 0.1)
+        {
+            animator.SetFloat("Walk", 0);
+        }
+        else
+        {
+            // Establece el valor del parámetro "Walk" en el Animator
+            animator.SetFloat("Walk", speed > 1.6f ? 1 : 0.3f);
+        }
+    }
+    private void RotateCharacter(float yRotation)
+    {
+        // Rota el personaje en el eje Y
+        transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
+    }
+
     private void TryMove(int newI, int newJ)
     {
         if (nodos[currentI, currentJ].HasNeighborWithId(nodos[newI, newJ].NodeId) && currentCooldown <= 0)
         {
             isMoving = true;
+            SetWalkAnimation();
+            speed = .1f;
             currentI = newI;
             currentJ = newJ;
             agent.SetDestination(nodos[currentI, currentJ].Position);
@@ -148,7 +174,9 @@ public class MovePlayer : MonoBehaviour
         isMoving = false;
         currentNode = nodos[currentI, currentJ].NodeId;
         currentCooldown = moveCooldown;
+        animator.SetFloat("Walk", 0); // Detener la animación al finalizar el movimiento
     }
+
     
     private void AddNeighborsFromAdjacencyMatrix(int[,] adjacencyMatrix)
     {
