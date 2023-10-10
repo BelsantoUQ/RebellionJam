@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mia
       objectReference: {fileID: 0}
+    - target: {fileID: 100166, guid: 3cefbbfe8c81fbb4283daa116169ef21, type: 3}
+      propertyPath: m_TagString
+      value: Player1
+      objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: 3cefbbfe8c81fbb4283daa116169ef21, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -110,6 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7075780e4d7de9244ba432a555cc482c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveCooldown: 0.5
+  walkSpeed: 2
+  runSpeed: 6
 --- !u!54 &6394092147141263731
 Rigidbody:
   m_ObjectHideFlags: 0
