@@ -19,13 +19,15 @@ public class SpawnRandomCards : MonoBehaviour
 
     void InstantiateOnRandomPosition()
     {
-
+        int index = 0;
         foreach (var card in cards)
         {
+
             int randomPos = Random.Range(0, spawnPositions.Count);
-            card.GetComponent<Card>().cardIndex = randomPos;
+            card.GetComponent<Card>().cardIndex = index;
             Instantiate(card, spawnPositions[randomPos], card.transform.rotation);
             spawnPositions.RemoveAt(randomPos);
+            index++;
         }
 
     }

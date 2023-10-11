@@ -51,7 +51,7 @@ public class Card : MonoBehaviour
         // Duración de la animación en segundos
         float tiempoDeDuracion = 0.5f;
         // Rotación final
-        Vector3 nuevaRotacion = new Vector3(0, 270, 0);
+        Vector3 nuevaRotacion = new Vector3(0, 180, 0);
         Vector3 rotacionInicial = transform.rotation.eulerAngles;
 
         float tiempoPasado = 0;
