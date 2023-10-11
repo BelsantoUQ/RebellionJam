@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
         volumeSlider.value = AudioManager.instance.backgroundMusic.volume;
     }
 
+
     public void OnVolumeSliderChanged()
     {
         AudioManager.instance.SetBackgroundMusicVolume(volumeSlider.value);
