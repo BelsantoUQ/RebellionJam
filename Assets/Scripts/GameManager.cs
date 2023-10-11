@@ -5,9 +5,6 @@ public class GameManager : MonoBehaviour
 {
     // Static reference to the GameManager instance
     public static GameManager Instance { get; private set; }
-
-    [SerializeField] private GameObject vincent;
-    [SerializeField] private GameObject mia;
     // Other GameManager variables and functions
     public bool IsMia { get; set; }
 
