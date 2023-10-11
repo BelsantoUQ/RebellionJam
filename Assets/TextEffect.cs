@@ -7,6 +7,9 @@ public class TextEffect : MonoBehaviour
     public float hoverIntensity = 1.5f; // Intensidad del brillo al hacer hover.
     public float clickBlinkSpeed = 5.0f; // Velocidad de parpadeo al hacer clic.
 
+    [SerializeField] private GameObject bg;
+
+
     private Text text;
     private Color originalColor;
     private bool isHovered;
@@ -39,11 +42,13 @@ public class TextEffect : MonoBehaviour
 
     public void OnPointerEnter()
     {
+        bg.SetActive(true);
         isHovered = true;
     }
 
     public void OnPointerExit()
     {
+        bg.SetActive(false);
         isHovered = false;
     }
 
