@@ -9,8 +9,8 @@ public class CardCompare : MonoBehaviour
     public string firstCardTag = null;
     public string secondCardTag = null;
 
-    public int firstCardInt;
-    public int secondCardInt;
+    public int firstCardIndex;
+    public int secondCardIndex;
 
     private GameObject[] correctCards = new GameObject[2];
 
@@ -23,11 +23,13 @@ public class CardCompare : MonoBehaviour
     public void AssignCardTag(GameObject card)
     {
         string cardTag = card.tag;
+        int cardIndex = card.GetComponent<Card>().cardIndex;
         if (firstCardTag == null)
         {
             StartCoroutine(card.GetComponent<Card>().FlipAnimation());
+
             firstCardTag = cardTag;
-            Debug.Log(firstCardTag);
+            firstCardIndex = cardIndex;
             correctCards[0] = card;
         }
         else
@@ -35,7 +37,7 @@ public class CardCompare : MonoBehaviour
             StartCoroutine(card.GetComponent<Card>().FlipAnimation());
 
             secondCardTag = cardTag;
-            Debug.Log(secondCardTag);
+            secondCardIndex = cardIndex;
             correctCards[1] = card;
 
             CompareCards(cardTag);
@@ -58,7 +60,7 @@ public class CardCompare : MonoBehaviour
 
     public void CompareCards(string cardTag)
     {
-        if (firstCardTag == secondCardTag)
+        if (firstCardTag == secondCardTag && firstCardIndex != secondCardIndex)
         {
             Debug.Log("correcto");
 
@@ -69,11 +71,17 @@ public class CardCompare : MonoBehaviour
             }
             firstCardTag = null;
             secondCardTag = null;
+
+            firstCardIndex = -1;
+            secondCardIndex = -1;
         }
         else
         {
             firstCardTag = null;
             secondCardTag = null;
+
+            firstCardIndex = -1;
+            secondCardIndex = -1;
             Debug.Log("diferente");
         }
     }

@@ -7,6 +7,8 @@ public class Card : MonoBehaviour
 
     [SerializeField] private GameObject cardCompare;
 
+    public int cardIndex;
+
     private bool cardDeactivated = false;
     private bool playerNear;
 
