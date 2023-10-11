@@ -66,7 +66,7 @@ public class CardCompare : MonoBehaviour
             firstCardIndex = -1;
             secondCardIndex = -1;
             cardsMatched++;
-            if (cardsMatched == 1)
+            if (cardsMatched == 6)
             {
                 OnAllCardsMatched();
             }
