@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public Slider volumeSlider;
-
+    [SerializeField] private Slider volumeSlider;
     [SerializeField] private GameObject credits;
     private bool creditsPressed = false;
 
@@ -19,19 +18,7 @@ public class UIManager : MonoBehaviour
     {
         AudioManager.instance.SetBackgroundMusicVolume(volumeSlider.value);
     }
-
-    public void playGame()
-    {
-        StartCoroutine(WaitForPlayGame());
-    }
-
-    public IEnumerator WaitForPlayGame()
-    {
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-
+    
     public void showCredits()
     {
         if (!creditsPressed)

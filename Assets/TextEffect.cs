@@ -4,9 +4,11 @@ using UnityEngine.UI;
 
 public class TextEffect : MonoBehaviour
 {
-    public float hoverIntensity = 1.5f; // Intensidad del brillo al hacer hover.
-    public float clickBlinkSpeed = 5.0f; // Velocidad de parpadeo al hacer clic.
-
+    [SerializeField] private float hoverIntensity = 1.5f; // Intensidad del brillo al hacer hover.
+    [SerializeField] private float clickBlinkSpeed = 5.0f; // Velocidad de parpadeo al hacer clic.
+    [SerializeField] private GameObject selector;
+    [SerializeField] private GameObject title;
+    [SerializeField] private GameObject ui;
     [SerializeField] private GameObject bg;
 
 
@@ -14,6 +16,8 @@ public class TextEffect : MonoBehaviour
     private Color originalColor;
     private bool isHovered;
     private bool isClicked;
+    private bool isActiveUI = true;
+    private bool isActiveTitle = true;
     private float timeSinceClick;
 
     private void Awake()
@@ -59,5 +63,43 @@ public class TextEffect : MonoBehaviour
         {
             timeSinceClick = 0f;
         }
+    }
+
+    
+    public void OnInitGame()
+    {
+        StartCoroutine(InicioConRetraso());
+    }
+    
+    public void OnShowCredits()
+    {
+        isActiveTitle = !isActiveTitle;
+        if (isActiveTitle)
+        {
+            StartCoroutine(HideWithDelay());
+        }
+        else
+        {
+            title.SetActive(isActiveTitle);
+        }
+    }
+
+    IEnumerator HideWithDelay()
+    {
+        // Espera n segundos
+        yield return new WaitForSeconds(.5f);
+        title.SetActive(isActiveTitle);
+
+    }
+
+    IEnumerator InicioConRetraso()
+    {
+        // Espera n segundos
+        yield return new WaitForSeconds(1.2f);
+
+        // Luego, ejecuta la función OnInitGame
+        isActiveUI = !isActiveUI;
+        ui.SetActive(isActiveUI);
+        selector.SetActive(!isActiveUI);
     }
 }
