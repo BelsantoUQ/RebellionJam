@@ -17,6 +17,7 @@ TagManager:
   - YellowCircle
   - YellowDiamond
   - Player1
+  - Mia
   layers:
   - Default
   - TransparentFX
