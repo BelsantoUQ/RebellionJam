@@ -10,15 +10,16 @@ public class WinCondition : MonoBehaviour
 
     private void Start()
     {
-
+        //verifica que el gameObject no sea nulo
         if (compareCards != null)
         {
+            //Suscribe al evento
             compareCards.GetComponent<CardCompare>().AllcardsMatchedEvent += HandleAllCardsMatchedEvent;
         }
 
     }
 
-
+    //Funcion que se ejecuta una vez ocurra el evento
     private void HandleAllCardsMatchedEvent()
     {
         winText.SetActive(true);
