@@ -4,7 +4,7 @@ using UnityEngine;
 public class Node
 {
     public int NodeId { get; set; }
-    public Vector3 Position { get; set; }
+    public Vector3 Position  { get; set; } 
     public int IsAble { get; set; }
 
     private List<int> Neighbors; 
