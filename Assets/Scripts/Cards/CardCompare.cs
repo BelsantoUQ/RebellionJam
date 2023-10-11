@@ -68,6 +68,7 @@ public class CardCompare : MonoBehaviour
             firstCardIndex = -1;
             secondCardIndex = -1;
             cardsMatched++;
+
             //Cuando haya resulto todas las combinaciones accione el evento
             if (cardsMatched == 1)
             {
