@@ -5,6 +5,9 @@ using UnityEngine;
 public class CardCompare : MonoBehaviour
 {
 
+    public delegate void AllcardsMatchedHandler();
+    public event AllcardsMatchedHandler AllcardsMatchedEvent;
+    private int cardsMatched = 0;
 
     public string firstCardTag = null;
     public string secondCardTag = null;
@@ -43,18 +46,6 @@ public class CardCompare : MonoBehaviour
             CompareCards(cardTag);
         }
 
-        //if (firstCardTag == secondCardTag)
-        //{
-        //    correctCards = GameObject.FindGameObjectsWithTag(firstCardTag);
-        //    foreach (var card in correctCards)
-        //    {
-        //        card.gameObject.GetComponent<CardOnClick>().DeactivateIfQual();
-        //    }
-
-        //}
-        //firstCardTag = null;
-        //secondCardTag = null;
-
     }
 
 
@@ -74,6 +65,11 @@ public class CardCompare : MonoBehaviour
 
             firstCardIndex = -1;
             secondCardIndex = -1;
+            cardsMatched++;
+            if (cardsMatched == 1)
+            {
+                OnAllCardsMatched();
+            }
         }
         else
         {
@@ -85,5 +81,18 @@ public class CardCompare : MonoBehaviour
             Debug.Log("diferente");
         }
     }
+
+    protected void OnAllCardsMatched()
+    {
+        AllcardsMatchedHandler handler = AllcardsMatchedEvent;
+
+        if (handler != null)
+        {
+            handler();
+        }
+
+    }
+
+
 
 }

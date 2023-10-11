@@ -49,7 +49,25 @@ public class MovePlayer : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+
+        
+        // Calcula la velocidad actual del NavMeshAgent
+        speed = agent.velocity.magnitude;
+        //Debug.Log("speed: "+speed);
+        if (speed>0.5f)
+        {
+            // Establece el valor del parámetro "Walk" en el Animator
+            animator.SetFloat("Walk", speed > 1.8f ? 1 : 0.3f);
+            
+        }
+        else
+        {
+            animator.SetFloat("Walk", 0);
+        }
+        
+
         SetWalkAnimation();
+
 
         if (!isMoving)
         {
