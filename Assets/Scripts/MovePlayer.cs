@@ -28,6 +28,9 @@ public class MovePlayer : MonoBehaviour
     //private int currentPathIndex = 0; // Variable para rastrear el índice actual en el camino
     
     
+    private bool nearCard;
+
+
     
     // Declarar e inicializar la matriz de Nodos en el mapa la cual contiene
     // un id de nodo, un Vector3 (posicion) y un entero que indica 0 si está diponible 
@@ -205,5 +208,9 @@ public class MovePlayer : MonoBehaviour
             }
         }
     }
+
+
+
+
 
 }
