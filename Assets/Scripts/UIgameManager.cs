@@ -49,7 +49,7 @@ public class UIgameManager : MonoBehaviour
 
     public IEnumerator WaitForPauseGame()
     {
-        yield return new WaitForSeconds(.6f);
+        yield return new WaitForSeconds(.3f);
         Time.timeScale = 0f;
         pauseMenu.SetActive(true);
     }
