@@ -9,27 +9,25 @@ public class CardCompare : MonoBehaviour
     public event AllcardsMatchedHandler AllcardsMatchedEvent;
     private int cardsMatched = 0;
 
-    public string firstCardTag = null;
-    public string secondCardTag = null;
+    public string firstCardTag = "";
+    public string secondCardTag = "";
 
-    public int firstCardIndex;
-    public int secondCardIndex;
+    public int firstCardIndex = -1;
+    public int secondCardIndex = -1;
 
     private GameObject[] correctCards = new GameObject[2];
 
-    private void Update()
-    {
-
-    }
 
 
     public void AssignCardTag(GameObject card)
     {
         string cardTag = card.tag;
         int cardIndex = card.GetComponent<Card>().cardIndex;
-        if (firstCardTag == null)
+        if (firstCardTag == "")
         {
-            StartCoroutine(card.GetComponent<Card>().FlipAnimation());
+            //StartCoroutine(card.GetComponent<Card>().FlipAnimationCo());
+            card.GetComponent<Card>().FlipAnimation();
+
 
             firstCardTag = cardTag;
             firstCardIndex = cardIndex;
@@ -37,31 +35,32 @@ public class CardCompare : MonoBehaviour
         }
         else
         {
-            StartCoroutine(card.GetComponent<Card>().FlipAnimation());
+            //StartCoroutine(card.GetComponent<Card>().FlipAnimationCo());
+            card.GetComponent<Card>().FlipAnimation();
+
 
             secondCardTag = cardTag;
             secondCardIndex = cardIndex;
             correctCards[1] = card;
 
-            CompareCards(cardTag);
+            CompareCards();
         }
 
     }
 
 
-    public void CompareCards(string cardTag)
+    public void CompareCards()
     {
         if (firstCardTag == secondCardTag && firstCardIndex != secondCardIndex)
         {
-            Debug.Log("correcto");
 
             //correctCards = GameObject.FindGameObjectsWithTag(firstCardTag);
             foreach (var card in correctCards)
             {
-                card.gameObject.GetComponent<Card>().DeactivateIfQual();
+                StartCoroutine(card.gameObject.GetComponent<Card>().DeactivateIfQual());
             }
-            firstCardTag = null;
-            secondCardTag = null;
+            firstCardTag = "";
+            secondCardTag = "";
 
             firstCardIndex = -1;
             secondCardIndex = -1;
@@ -73,8 +72,9 @@ public class CardCompare : MonoBehaviour
         }
         else
         {
-            firstCardTag = null;
-            secondCardTag = null;
+            StartCoroutine(returnPosition());
+            firstCardTag = "";
+            secondCardTag = "";
 
             firstCardIndex = -1;
             secondCardIndex = -1;
@@ -91,6 +91,19 @@ public class CardCompare : MonoBehaviour
             handler();
         }
 
+    }
+
+
+    IEnumerator returnPosition()
+    {
+        yield return new WaitForSeconds(1f);
+        if (correctCards[0] != null && correctCards[1] != null)
+        {
+            foreach (var card in correctCards)
+            {
+                card.gameObject.GetComponent<Card>().returnToInitialPosition();
+            }
+        }
     }
 
 

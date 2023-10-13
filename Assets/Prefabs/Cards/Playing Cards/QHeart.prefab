@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardCompare: {fileID: 0}
+  cardFlip: {fileID: 6711095614504178274}
   cardIndex: 0
 --- !u!65 &3459109004820431578
 BoxCollider:
@@ -144,6 +145,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 8fef523a36fb4384dbd542c31b34f451, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3161271946506657987}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 8fef523a36fb4384dbd542c31b34f451, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8937304892404384693}
   m_SourcePrefab: {fileID: 100100000, guid: 8fef523a36fb4384dbd542c31b34f451, type: 3}
 --- !u!4 &6711095614504144450 stripped
 Transform:
@@ -171,3 +175,15 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &8937304892404384693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6711095614504178274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e47d784564bf874281722d17fcbc202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

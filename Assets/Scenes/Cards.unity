@@ -1891,7 +1891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstCardTag: 
-  secondCardTag: none
+  secondCardTag: 
   firstCardIndex: 0
   secondCardIndex: 0
 --- !u!4 &531662832

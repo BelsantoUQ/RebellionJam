@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class Card : MonoBehaviour
 {
 
     [SerializeField] private GameObject cardCompare;
+    [SerializeField] private GameObject cardFlip;
 
     public int cardIndex;
 
@@ -27,7 +29,6 @@ public class Card : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         playerNear = true;
-        Debug.Log(other.tag);
     }
 
     private void OnTriggerExit(Collider other)
@@ -45,8 +46,20 @@ public class Card : MonoBehaviour
         }
     }
 
+    public void FlipAnimation()
+    {
+        cardFlip.GetComponent<CardFlip>().DotTweenFlipAnimation();
 
-    public IEnumerator FlipAnimation()
+    }
+
+    public void returnToInitialPosition()
+    {
+        cardFlip.GetComponent<CardFlip>().cardIsFlip = false;
+        cardFlip.GetComponent<CardFlip>().ResetFlip();
+    }
+
+
+    public IEnumerator FlipAnimationCo()
     {
         // Duración de la animación en segundos
         float tiempoDeDuracion = 0.5f;
@@ -83,9 +96,13 @@ public class Card : MonoBehaviour
 
 
 
-    public void DeactivateIfQual()
+    public IEnumerator DeactivateIfQual()
     {
-        gameObject.SetActive(false);
+        yield return new WaitForSeconds (1f);
+        transform.DOScale(0.1f, 1f).OnComplete(() =>
+        {
+            gameObject.SetActive(false);
+        });
     }
 
 
