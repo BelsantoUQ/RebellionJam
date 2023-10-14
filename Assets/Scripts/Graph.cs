@@ -99,4 +99,20 @@ public class Graph
         }
     }
     
+    public (Node, int, int) GetNodeById(int nodeId)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                if (Nodos[i, j].NodeId == nodeId)
+                {
+                    return (Nodos[i, j], i, j);
+                }
+            }
+        }
+
+        // Si no se encuentra ningún nodo con el ID proporcionado, devuelve nulo.
+        return (null, -1, -1);
+    }
 }

@@ -40,9 +40,14 @@ public class MovePlayer : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>(); // Obtiene la referencia al Animator
         world = new Graph();
-        // Agregar vecinos desde la matriz de adyacencia
-        agent.SetDestination(world.Nodos[currentI, currentJ].Position); // Inicialmente, mueve al jugador al primer nodo
-
+        // Inicialmente, mueve al jugador al primer nodo
+        currentNode = gameManager.IsContinuing ? gameManager.CurrentNode : 2;
+        var result = world.GetNodeById(currentNode);
+        currentI = result.Item2;
+        currentJ = result.Item3;
+        Debug.Log(currentNode+"Nodo: "+ gameManager.CurrentNode + "Pos i:"+currentI+ " j:"+currentJ);
+        gameObject.transform.position =  (world.Nodos[currentI, currentJ].Position); 
+            
         if (isVincent)
         {
             gameObject.SetActive(!gameManager.IsMia);
@@ -163,15 +168,7 @@ public class MovePlayer : MonoBehaviour
         isMoving = false;
         currentNode = world.Nodos[currentI, currentJ].NodeId;
         currentCooldown = moveCooldown;
+        gameManager.CurrentNode = world.Nodos[currentI, currentJ].NodeId;
         animator.SetFloat("Walk", 0); // Detener la animación al finalizar el movimiento
     }
-
-    
-    
-   
-
-
-
-
-
 }
