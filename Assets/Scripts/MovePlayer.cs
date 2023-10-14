@@ -45,7 +45,7 @@ public class MovePlayer : MonoBehaviour
         var result = world.GetNodeById(currentNode);
         currentI = result.Item2;
         currentJ = result.Item3;
-        Debug.Log(currentNode+"Nodo: "+ gameManager.CurrentNode + "Pos i:"+currentI+ " j:"+currentJ);
+//        Debug.Log(currentNode+"Nodo: "+ gameManager.CurrentNode + "Pos i:"+currentI+ " j:"+currentJ);
         gameObject.transform.position =  (world.Nodos[currentI, currentJ].Position); 
             
         if (isVincent)

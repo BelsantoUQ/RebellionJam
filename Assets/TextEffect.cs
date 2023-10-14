@@ -11,7 +11,7 @@ public class TextEffect : MonoBehaviour
     [SerializeField] private GameObject ui;
     [SerializeField] private GameObject bg;
 
-
+    private GameManager gameManager;
     private Text text;
     private Color originalColor;
     private bool isHovered;
@@ -28,6 +28,7 @@ public class TextEffect : MonoBehaviour
 
     private void Update()
     {
+        gameManager = GameManager.Instance;
         if (isClicked)
         {
             timeSinceClick += Time.deltaTime;
@@ -97,6 +98,10 @@ public class TextEffect : MonoBehaviour
         // Espera n segundos
         yield return new WaitForSeconds(1.2f);
 
+        
+        gameManager.IsContinuing = false;
+        gameManager.CurrentNode = 2;
+        
         // Luego, ejecuta la función OnInitGame
         isActiveUI = !isActiveUI;
         ui.SetActive(isActiveUI);
