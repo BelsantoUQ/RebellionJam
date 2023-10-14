@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     // Static reference to the GameManager instance
     public static GameManager Instance { get; private set; }
-
+    
     // Other GameManager variables and functions
     public bool IsMia { get; set; }
 
@@ -23,7 +24,4 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    // Rest of your GameManager code
-    // ...
 }

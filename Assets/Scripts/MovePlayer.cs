@@ -15,12 +15,13 @@ public class MovePlayer : MonoBehaviour
     private int currentNode = 2;
     private float speed = 0;
     private Graph world;
-    
+    private GameManager gameManager;
     [SerializeField]
     private float stopAnimationDistance = 0.1f; // Distancia a la que se detendrá la animación
     [SerializeField]
     private float moveCooldown = 0.5f; // Tiempo de espera entre movimientos
-  
+
+    [SerializeField] private bool isVincent;
     //int destinationNodeId = 20;
     //private List<int> shortestPath;
     //private int currentPathIndex = 0; // Variable para rastrear el índice actual en el camino
@@ -35,15 +36,21 @@ public class MovePlayer : MonoBehaviour
     
     void Start()
     {
+        gameManager = GameManager.Instance;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>(); // Obtiene la referencia al Animator
         world = new Graph();
         // Agregar vecinos desde la matriz de adyacencia
         agent.SetDestination(world.Nodos[currentI, currentJ].Position); // Inicialmente, mueve al jugador al primer nodo
 
-        // Recuerda actualizar "currentNode" cuando haya terminado el recorrido para seguir la posición actual del personaje.
-        
-        // Comienza a mover al personaje hacia el primer nodo del camino más corto
+        if (isVincent)
+        {
+            gameObject.SetActive(!gameManager.IsMia);
+        }
+        else
+        {
+            gameObject.SetActive(gameManager.IsMia);
+        }
         
     }
     // Update is called once per frame
