@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class CardCompare : MonoBehaviour
 {
-
+    //Delegado y evento
     public delegate void AllcardsMatchedHandler();
     public event AllcardsMatchedHandler AllcardsMatchedEvent;
     private int cardsMatched = 0;
 
+<<<<<<< HEAD
     public string firstCardTag = "";
     public string secondCardTag = "";
+=======
+    //Variables para comparar las cartas
+    public string firstCardTag = null;
+    public string secondCardTag = null;
+>>>>>>> main
 
     public int firstCardIndex = -1;
     public int secondCardIndex = -1;
@@ -18,7 +24,7 @@ public class CardCompare : MonoBehaviour
     private GameObject[] correctCards = new GameObject[2];
 
 
-
+    //Se le asigna un valor a las varibles de comparacion
     public void AssignCardTag(GameObject card)
     {
         string cardTag = card.tag;
@@ -43,7 +49,12 @@ public class CardCompare : MonoBehaviour
             secondCardIndex = cardIndex;
             correctCards[1] = card;
 
+<<<<<<< HEAD
             CompareCards();
+=======
+            //Una vez tenga las dos cartas compararlas para saber si son las mismas
+            CompareCards(cardTag);
+>>>>>>> main
         }
 
     }
@@ -65,7 +76,9 @@ public class CardCompare : MonoBehaviour
             firstCardIndex = -1;
             secondCardIndex = -1;
             cardsMatched++;
-            if (cardsMatched == 6)
+
+            //Cuando haya resulto todas las combinaciones accione el evento
+            if (cardsMatched == 1)
             {
                 OnAllCardsMatched();
             }
@@ -82,6 +95,7 @@ public class CardCompare : MonoBehaviour
         }
     }
 
+    //Funcion para activar el evento
     protected void OnAllCardsMatched()
     {
         AllcardsMatchedHandler handler = AllcardsMatchedEvent;
