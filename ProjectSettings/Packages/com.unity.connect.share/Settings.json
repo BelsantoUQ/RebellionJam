@@ -19,7 +19,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"C:/Users/USER/Documents/Programacion/Builds Unity/MiasBuild/Build2;C:/Users/USER/Documents/Programacion/Builds Unity/MiasBuild;C:/Users/USER/Documents/Programacion/Builds Unity/Mia2;C:/Users/USER/Documents/Programacion/Builds Unity/Mia;C:/Users/USER/Documents/Programacion/Builds Unity/Mias2;C:/Users/luisd/OneDrive/Documents/GitHub/RebellionJam/WebGL Builds/2nd;C:/Users/luisd/OneDrive/Documents/GitHub/RebellionJam/WebGL Builds;;;\"}"
+                "value": "{\"m_Value\":\"C:/Users/USER/Documents/Programacion/Builds Unity/MiasBuild/Build4;C:/Users/USER/Documents/Programacion/Builds Unity/MiasBuild/Build3;C:/Users/USER/Documents/Programacion/Builds Unity/MiasBuild/Build2;C:/Users/USER/Documents/Programacion/Builds Unity/MiasBuild;C:/Users/USER/Documents/Programacion/Builds Unity/Mia2;C:/Users/USER/Documents/Programacion/Builds Unity/Mia;C:/Users/USER/Documents/Programacion/Builds Unity/Mias2;C:/Users/luisd/OneDrive/Documents/GitHub/RebellionJam/WebGL Builds/2nd;C:/Users/luisd/OneDrive/Documents/GitHub/RebellionJam/WebGL Builds;\"}"
             }
         ]
     }
