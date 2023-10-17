@@ -61,9 +61,9 @@ public class Card : MonoBehaviour
 
     public IEnumerator FlipAnimationCo()
     {
-        // Duración de la animación en segundos
+        // DuraciÃ³n de la animaciÃ³n en segundos
         float tiempoDeDuracion = 0.5f;
-        // Rotación final
+        // RotaciÃ³n final
         Vector3 nuevaRotacion = new Vector3(0, 180, 0);
         Vector3 rotacionInicial = transform.rotation.eulerAngles;
 

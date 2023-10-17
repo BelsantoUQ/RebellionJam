@@ -11,6 +11,8 @@ public class MovePlayer : MonoBehaviour
     private int currentI = 0;
     private int currentJ = 1;
     private bool isMoving = false;
+    private bool isControlAble = false;
+    private float timeToInit = 0f;
     private float currentCooldown = 0f;
     private int currentNode = 2;
     private float speed = 0;
@@ -62,68 +64,81 @@ public class MovePlayer : MonoBehaviour
     private void Update()
     {
 
-        
-        // Calcula la velocidad actual del NavMeshAgent
-        speed = agent.velocity.magnitude;
-        //Debug.Log("speed: "+speed);
-        if (speed>0.5f)
+        if (isControlAble)
         {
-            // Establece el valor del parámetro "Walk" en el Animator
-            animator.SetFloat("Walk", speed > 1.8f ? 1 : 0.3f);
-            
+
+
+            // Calcula la velocidad actual del NavMeshAgent
+            speed = agent.velocity.magnitude;
+            //Debug.Log("speed: "+speed);
+            if (speed > 0.5f)
+            {
+                // Establece el valor del parámetro "Walk" en el Animator
+                animator.SetFloat("Walk", speed > 1.8f ? 1 : 0.3f);
+
+            }
+            else
+            {
+                animator.SetFloat("Walk", 0);
+            }
+
+
+            SetWalkAnimation();
+
+
+            if (!isMoving)
+            {
+                // Realiza la rotación del personaje antes de moverlo
+                if (Input.GetKeyDown(KeyCode.W) && currentI < 4)
+                {
+                    if (speed < 0.1)
+                        RotateCharacter(-90f);
+
+                    TryMove(currentI + 1, currentJ);
+                }
+                else if (Input.GetKeyDown(KeyCode.A) && currentJ > 0)
+                {
+                    if (speed < 0.1)
+                        RotateCharacter(180f);
+
+                    TryMove(currentI, currentJ - 1);
+                }
+                else if (Input.GetKeyDown(KeyCode.S) && currentI > 0)
+                {
+                    if (speed < 0.1)
+                        RotateCharacter(90f);
+
+                    TryMove(currentI - 1, currentJ);
+                }
+                else if (Input.GetKeyDown(KeyCode.D) && currentJ < 4)
+                {
+                    if (speed < 0.1)
+                        RotateCharacter(0f);
+
+                    TryMove(currentI, currentJ + 1);
+                }
+            }
+
+            // Verifica si el jugador está cerca del destino y detiene la animación
+            if (Vector3.Distance(transform.position, agent.destination) <= stopAnimationDistance)
+            {
+                animator.SetFloat("Walk", 0);
+            }
+
+            // Reduce el tiempo de espera entre movimientos
+            if (currentCooldown > 0)
+            {
+                currentCooldown -= Time.deltaTime;
+            }
         }
         else
         {
-            animator.SetFloat("Walk", 0);
-        }
-        
-
-        SetWalkAnimation();
-
-
-        if (!isMoving)
-        {
-            // Realiza la rotación del personaje antes de moverlo
-            if (Input.GetKeyDown(KeyCode.W) && currentI < 4)
+            timeToInit += Time.deltaTime;
+            Debug.Log("Time: "+timeToInit);
+            if (timeToInit >46)
             {
-                if (speed < 0.1)
-                    RotateCharacter(-90f);
-                
-                TryMove(currentI + 1, currentJ);
+                isControlAble = true;
             }
-            else if (Input.GetKeyDown(KeyCode.A) && currentJ > 0)
-            {
-                if (speed < 0.1)
-                    RotateCharacter(180f);
-                
-                TryMove(currentI, currentJ - 1);
-            }
-            else if (Input.GetKeyDown(KeyCode.S) && currentI > 0)
-            {
-                if (speed < 0.1)
-                    RotateCharacter(90f);
-                
-                TryMove(currentI - 1, currentJ);
-            }
-            else if (Input.GetKeyDown(KeyCode.D) && currentJ < 4)
-            {
-                if (speed < 0.1)
-                    RotateCharacter(0f);
-                
-                TryMove(currentI, currentJ + 1);
-            }
-        }
-
-        // Verifica si el jugador está cerca del destino y detiene la animación
-        if (Vector3.Distance(transform.position, agent.destination) <= stopAnimationDistance)
-        {
-            animator.SetFloat("Walk", 0);
-        }
-
-        // Reduce el tiempo de espera entre movimientos
-        if (currentCooldown > 0)
-        {
-            currentCooldown -= Time.deltaTime;
         }
     }
 
