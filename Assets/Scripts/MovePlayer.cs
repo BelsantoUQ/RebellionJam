@@ -134,7 +134,7 @@ public class MovePlayer : MonoBehaviour
         else
         {
             timeToInit += Time.deltaTime;
-            Debug.Log("Time: "+timeToInit);
+//            Debug.Log("Time: "+timeToInit);
             if (timeToInit >46)
             {
                 isControlAble = true;

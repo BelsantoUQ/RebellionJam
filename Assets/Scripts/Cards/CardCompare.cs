@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,13 @@ public class CardCompare : MonoBehaviour
 
     private GameObject[] correctCards = new GameObject[2];
 
+    private GameManager gameManager;
 
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+        cardsMatched = gameManager.CardsMatched;
+    }
 
     public void AssignCardTag(GameObject card)
     {
@@ -61,7 +68,6 @@ public class CardCompare : MonoBehaviour
             }
             firstCardTag = "";
             secondCardTag = "";
-
             firstCardIndex = -1;
             secondCardIndex = -1;
             cardsMatched++;

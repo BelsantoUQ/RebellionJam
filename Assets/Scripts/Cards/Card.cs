@@ -8,14 +8,16 @@ public class Card : MonoBehaviour
 
     [SerializeField] private GameObject cardCompare;
     [SerializeField] private GameObject cardFlip;
-
+    private GameManager gameManager;
     public int cardIndex;
 
     private bool cardDeactivated = false;
     private bool playerNear;
+    private bool isFounded = false;
 
     private void Start()
     {
+        gameManager = GameManager.Instance;
         cardCompare = GameObject.Find("CardCompare");
     }
 
@@ -25,6 +27,10 @@ public class Card : MonoBehaviour
         cardSelected();
     }
 
+    public bool IsFounded()
+    {
+        return isFounded;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -101,6 +107,9 @@ public class Card : MonoBehaviour
         yield return new WaitForSeconds (1f);
         transform.DOScale(0.1f, 1f).OnComplete(() =>
         {
+            gameManager.CurrentCardsPositions[cardIndex].IsPositionActive = false;
+            Debug.Log("Se desactiva la carta "+ cardIndex);
+            isFounded = true;
             gameObject.SetActive(false);
         });
     }
