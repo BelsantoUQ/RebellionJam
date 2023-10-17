@@ -65,7 +65,6 @@ public class TextEffect : MonoBehaviour
             timeSinceClick = 0f;
         }
     }
-
     
     public void OnInitGame()
     {
@@ -97,11 +96,9 @@ public class TextEffect : MonoBehaviour
     {
         // Espera n segundos
         yield return new WaitForSeconds(1.2f);
-
         
         gameManager.IsContinuing = false;
         gameManager.CurrentNode = 2;
-        
         // Luego, ejecuta la función OnInitGame
         isActiveUI = !isActiveUI;
         ui.SetActive(isActiveUI);

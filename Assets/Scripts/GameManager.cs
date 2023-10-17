@@ -152,6 +152,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void NewCardsPosition()
+    {
+        currentCardsPosition = new List<CardPosition>();
+    }
+    
     public void PrintCurrentCardsPositions()
     {
         foreach (var card in currentCardsPosition)

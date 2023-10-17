@@ -16,13 +16,15 @@ public class SpawnRandomCards : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
-        if (gameManager.IsContinuing)
+        if (gameManager.IsContinuing == true)
         {
             InstantiateCuntinuePosition();
+            Debug.Log("Continue");
         }
         else
         {
             InstantiateOnRandomPosition();
+            Debug.Log("New");
         }
     }
 
@@ -49,7 +51,7 @@ public class SpawnRandomCards : MonoBehaviour
     void InstantiateOnRandomPosition()
     {
         int index = 0;
-        currentCardsPositions = new List<int>();
+        gameManager.NewCardsPosition();
         foreach (var card in cards)
         {
             int randomPos = Random.Range(0, spawnPositions.Count);
@@ -62,7 +64,6 @@ public class SpawnRandomCards : MonoBehaviour
             index++;
         }
 
-         
     }
 
 }
